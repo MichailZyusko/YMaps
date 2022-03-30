@@ -53,7 +53,7 @@ function MyMap() {
         {placemarks.map((placemark: TPlacemark) => (
           <Placemark
             key={placemark.id}
-            geometry={placemark.coords}
+            geometry={placemark.coordinates}
             options={defaultOptions}
             properties={propForPlacemark(placemark)}
           />

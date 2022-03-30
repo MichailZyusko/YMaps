@@ -1,6 +1,6 @@
 export type TPlacemark = {
     id: string;
-    coords?: [number, number];
+    coordinates?: [number, number];
     lat?: number;
     lon?: number;
     description?: string;
