@@ -1,10 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import db from '../../../db/instance';
+import { v4 as uuid } from 'uuid';
 import { TPlacemark } from '../types';
 import { PlacemarkType } from '../constants/enums';
 import ApiError from '../../../errors/ApiError';
 
 class DTOCreatePlacemark {
+  public id: string;
+
   public name: string;
 
   public description: string;
@@ -24,6 +27,7 @@ class DTOCreatePlacemark {
     description,
     rating,
   } : TPlacemark) {
+    this.id = uuid();
     this.name = name;
     this.description = description || 'Тут нет описания';
     [this.lat] = coordinates;

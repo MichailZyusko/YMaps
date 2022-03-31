@@ -8,10 +8,10 @@ export default class Placemark {
     this.connection = connection;
   }
 
-  async save(placemark: TPlacemark) {
+  async save(placemark: TPlacemark): Promise<boolean> {
     const sql = `
-      INSERT INTO placemarks (id, ${Object.keys(placemark).join(', ')})
-      VALUES (DEFAULT, ${Object.values(placemark).map((item) => `'${item}'`).join(', ')})
+      INSERT INTO placemarks (${Object.keys(placemark).join(', ')})
+      VALUES (${Object.values(placemark).map((item) => `'${item}'`).join(', ')})
     `;
     const [{ affectedRows: result }] = await this.connection.query(sql);
 

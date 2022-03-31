@@ -50,7 +50,6 @@ export const CustomInput = styled.input.attrs((props) => ({
 
 export const CustomTextArea = styled.textarea.attrs((props) => ({
   ...props,
-
 }))`
   max-height: 70px;
   min-height: 70px;
@@ -59,7 +58,7 @@ export const CustomTextArea = styled.textarea.attrs((props) => ({
   border-radius: 20px;
   border: 1px solid #ccc;
   color: #333;
-  padding: 0 10px;
+  padding: 10px;
   font-size: 16px;
   outline: none;
 
@@ -80,7 +79,7 @@ export class Input {
     return (
       <Item>
         <Label htmlFor={name}>{label}</Label>
-        <CustomInput type="text" name={name} placeholder={placeholder} />
+        <CustomInput type="text" name={name} placeholder={placeholder} defaultValue="1111111" />
       </Item>
     );
   }
@@ -89,7 +88,7 @@ export class Input {
     return (
       <Item>
         <Label htmlFor={name}>{label}</Label>
-        <CustomTextArea name={name} placeholder={placeholder} />
+        <CustomTextArea name={name} placeholder={placeholder} defaultValue="22222222" />
       </Item>
     );
   }
