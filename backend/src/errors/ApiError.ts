@@ -1,9 +1,9 @@
 export default class ApiError extends Error {
-  public statusCode: number;
+  public status: number;
 
-  constructor(statusCode: number = 500, message: string = 'Something went wrong') {
+  constructor(status: number = 500, message: string = 'Internal server error') {
     super(message);
     this.name = ApiError.name;
-    this.statusCode = statusCode;
+    this.status = status;
   }
 }

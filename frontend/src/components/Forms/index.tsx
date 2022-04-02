@@ -1,7 +1,5 @@
-import React, { FormEvent } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Input } from './Components';
-import URL from '../../constants/URLs';
 
 type TProps = {
   onSubmit: (values: any) => void;

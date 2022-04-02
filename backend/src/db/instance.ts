@@ -1,12 +1,23 @@
 import mysql from 'mysql2';
 import config from '../../config';
-import Placemark from './models/Placemark';
+import GeoObjects from './models/GeoObjects';
 
 const {
   db: {
     host, user, password, database, port,
   },
 } = config;
+
+const initSQLQuery = `
+  CREATE DATABASE IF NOT EXISTS ${database};
+  
+  use ${database};
+  
+  CREATE TABLE IF NOT EXISTS GeoObjects (
+    id varchar(36) PRIMARY KEY,
+    data JSON
+  );
+`;
 
 type DBInstance = DB | null;
 
@@ -15,7 +26,7 @@ class DB {
 
   private static connection: mysql.Connection;
 
-  public Placemark: Placemark;
+  public GeoObjects: GeoObjects;
 
   constructor() {
     if (DB.instance) {
@@ -31,7 +42,15 @@ class DB {
       password,
       database,
     }).promise();
-    this.Placemark = new Placemark(DB.connection);
+    this.GeoObjects = new GeoObjects(DB.connection);
+
+    // DB.connection.query(initSQLQuery)
+    //   // @ts-ignore
+    //   .then(() => {
+    //     console.log('DB initialized');
+    //   }).catch((err: any) => {
+    //     console.log(err);
+    //   });
   }
 }
 

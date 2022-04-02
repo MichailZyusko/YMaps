@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import serverless from 'serverless-http';
-import placemarkRouter from './src/entity/placemark/routes/index';
+import pointRouter from './src/entity/geoObjects/point/routes/index';
 import errorHandler from './src/errors/errorHandler';
 import config from './config';
 import cors from './src/middleware/cors';
@@ -13,7 +13,7 @@ app.use(cors);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/api/v1/placemarks', placemarkRouter);
+app.use('/api/v1/points', pointRouter);
 app.use(errorHandler);
 
 app.listen(port, host, () => {

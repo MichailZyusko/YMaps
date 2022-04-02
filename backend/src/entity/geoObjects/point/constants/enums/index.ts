@@ -1,3 +1,3 @@
-export enum PlacemarkType {
+export enum PointType {
   SHAWARMA = 'Шаурма',
 }
