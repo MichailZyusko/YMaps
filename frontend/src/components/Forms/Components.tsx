@@ -16,30 +16,35 @@ const Item = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex: 1;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
-const Label = styled.label.attrs((props) => ({
+export const Label = styled.label.attrs((props) => ({
   ...props,
 }))`
   display: flex;
   align-self: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin-right: 20px;
-  color: white;
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 1.2em;
+  color: #505050;
 `;
 
 export const CustomInput = styled.input.attrs((props) => ({
   ...props,
 }))`
-  width: 200px;
+  width: 100%;
   height: 35px;
   border-radius: 20px;
   border: 1px solid #ccc;
   color: #333;
-  padding: 0 10px;
+  padding: 5px 10px;
   font-size: 16px;
   outline: none;
 
@@ -53,8 +58,8 @@ export const CustomTextArea = styled.textarea.attrs((props) => ({
 }))`
   max-height: 70px;
   min-height: 70px;
-  max-width: 200px;
-  min-width: 200px;
+  max-width: 250px;
+  min-width: 100%;
   border-radius: 20px;
   border: 1px solid #ccc;
   color: #333;
@@ -71,6 +76,7 @@ type TProps = {
   label: string;
   name: string;
   placeholder?: string;
+  style?: React.CSSProperties;
 }
 
 export class Input {
@@ -84,16 +90,18 @@ export class Input {
     );
   }
 
-  static TextArea({ label, name, placeholder }: TProps) {
+  static TextArea({
+    label, name, placeholder, style,
+  }: TProps) {
     return (
-      <Item>
-        <Label htmlFor={name}>{label}</Label>
+      <Item style={style}>
+        {label && <Label htmlFor={name}>{label}</Label>}
         <CustomTextArea name={name} placeholder={placeholder} defaultValue="22222222" />
       </Item>
     );
   }
 
-  static ProgressBar({ label, name }: TProps) {
+  static Rating({ label, name }: TProps) {
     return (
       <Item>
         <Label htmlFor={name}>{label}</Label>

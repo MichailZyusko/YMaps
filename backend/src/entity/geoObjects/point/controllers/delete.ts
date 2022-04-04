@@ -9,7 +9,7 @@ type TParams = {
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params as TParams;
-    const isSuccessfullyDeleted: boolean = await db.GeoObjects.deleteById(id);
+    const isSuccessfullyDeleted: boolean = await db.GeoObjects.deleteById({ id });
 
     if (!isSuccessfullyDeleted) {
       throw new ApiError(404, 'Placemark not found');

@@ -4,7 +4,7 @@ import {
   createPoint,
   getPoints,
   getPointById,
-  // updatePoint,
+  updatePoint,
   deletePoint,
 } from '../controllers';
 
@@ -16,7 +16,7 @@ router.route('/')
 
 router.route('/:id')
   .get(getPointById)
-  // .put(updatePoint)
+  .put(updatePoint)
   .delete(deletePoint);
 
 export default router;

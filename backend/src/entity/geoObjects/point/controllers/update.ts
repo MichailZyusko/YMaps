@@ -1,13 +1,41 @@
-// import { NextFunction, Request, Response } from 'express';
-// import db from '../../../db/instance';
-//
-// export default async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     const { id } = req.params;
-//     // const placemarks = await db.Placemark.findByIdAndUpdate({id});
-//
-//     res.status(201).json({});
-//   } catch (error: any) {
-//     next(error);
-//   }
-// };
+import { NextFunction, Request, Response } from 'express';
+import { v4 as uuid } from 'uuid';
+import db from '../../../../db/instance';
+import ApiError from '../../../../errors/ApiError';
+
+type TUpdate = {
+  description: string;
+  rating: number;
+};
+
+class DTO {
+  public id: string;
+
+  public description: string;
+
+  public rating: number;
+
+  constructor({ description, rating } : TUpdate) {
+    this.id = uuid();
+    this.description = description;
+    this.rating = rating;
+  }
+}
+
+export default async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const feedback = new DTO(req.body);
+    const isSuccessfullyUpdated = await db.GeoObjects.findByIdAndUpdate({ id, feedback });
+
+    if (!isSuccessfullyUpdated) {
+      throw new ApiError(404, 'Point not found');
+    }
+
+    const updatedPoint = await db.GeoObjects.findById({ id });
+
+    res.status(201).json(updatedPoint);
+  } catch (error: any) {
+    next(error);
+  }
+};

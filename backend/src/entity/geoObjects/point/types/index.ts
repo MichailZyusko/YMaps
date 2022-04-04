@@ -1,6 +1,6 @@
 import { PointType } from '../constants/enums';
 
-type TFeedback = {
+export type TFeedback = {
   id: string;
   description: string;
   rating: number;

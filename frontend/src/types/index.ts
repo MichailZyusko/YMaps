@@ -1,10 +1,16 @@
-export type TPlacemark = {
-    id: string;
-    coordinates?: [number, number];
-    lat?: number;
-    lon?: number;
-    description?: string;
-    rating?: number;
+export type TFeedback = {
+  id: string;
+  description: string;
+  rating: number;
+};
+
+export type TPoint = {
+  id: string;
+  type?: string;
+  name?: string;
+  props?: {
     name: string;
-    type?: string;
+    feedbacks: TFeedback[];
+  };
+  coords: [number, number];
 };

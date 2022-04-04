@@ -1,5 +1,5 @@
 import mysql from 'mysql2';
-import { TMappedPoint, TPoint } from '../../entity/geoObjects/point/types';
+import { TFeedback, TMappedPoint, TPoint } from '../../entity/geoObjects/point/types';
 
 export default class GeoObjects {
   private connection: any;
@@ -30,7 +30,7 @@ export default class GeoObjects {
     return result;
   }
 
-  async findById(id: string): Promise<TPoint> {
+  async findById({ id } : { id: string }): Promise<TPoint> {
     const sql = `
       SELECT
         id,
@@ -42,17 +42,22 @@ export default class GeoObjects {
 
     return result;
   }
-  //
-  // async findByIdAndUpdate({ id, placemark }: { id: string; placemark: TPlacemark }) {
-  //   const result = await this.connection.query(
-  //     'UPDATE GeoObjects SET ? WHERE id = ?',
-  //     [placemark, id],
-  //   );
-  //
-  //   return result;
-  // }
 
-  async deleteById(id: string): Promise<boolean> {
+  async findByIdAndUpdate({ id, feedback } : { id: string, feedback: TFeedback }): Promise<boolean> {
+    const sql = `
+      UPDATE maps.GeoObjects
+      SET data = JSON_ARRAY_APPEND(
+        data,
+        '$.props.feedbacks',
+        CAST('${JSON.stringify(feedback)}' AS JSON)
+      )
+      WHERE id = '${id}'` as unknown as PermissionDescriptor;
+    const [{ affectedRows: result }] = await this.connection.query(sql);
+
+    return !!result;
+  }
+
+  async deleteById({ id } : { id: string }): Promise<boolean> {
     const sql = `DELETE FROM GeoObjects WHERE id = '${id}'` as unknown as PermissionDescriptor;
     const [{ affectedRows: result }] = await this.connection.query(sql);
 

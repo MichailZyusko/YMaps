@@ -9,7 +9,7 @@ type TParams = {
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params as TParams;
-    const potint: TPoint = await db.GeoObjects.findById(id);
+    const potint: TPoint = await db.GeoObjects.findById({ id });
 
     res.status(201).json(potint);
   } catch (error: any) {
