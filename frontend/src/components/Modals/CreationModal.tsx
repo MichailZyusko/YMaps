@@ -10,16 +10,18 @@ Modal.setAppElement('#root');
 type TProps = {
     isOpen: boolean;
     onClose: () => void;
+  /* eslint-disable-next-line */
     onSubmit: (values: any) => void;
 };
 
 export default function CreationModal({ isOpen, onClose, onSubmit }: TProps) {
   const onClickHandler = () => {
+    /* eslint-disable-next-line */
     const inputs = document.querySelector('form')?.elements;
 
     if (inputs) {
-      // @ts-ignore
-      const values = Array.from(inputs).reduce((acc: any, input: HTMLInputElement) => {
+      /* eslint-disable-next-line */
+      const values = Array.from(inputs).reduce((acc: any, input: any) => {
         if (input.name === 'rating') {
           if (input.checked) {
             acc[input.name] = input.value;

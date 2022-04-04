@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 type TProps = {
+  /* eslint-disable-next-line */
   onClick: (values: any) => void;
   children: React.ReactNode;
   style?: React.CSSProperties;

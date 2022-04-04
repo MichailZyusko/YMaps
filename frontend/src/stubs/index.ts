@@ -1,5 +1,6 @@
 import { TPoint } from '../types';
 
+/* eslint-disable-next-line */
 export const defaultPoint: TPoint = {
   id: '',
   type: '',

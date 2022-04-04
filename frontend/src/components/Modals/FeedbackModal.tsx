@@ -15,6 +15,7 @@ Modal.setAppElement('#root');
 type TProps = {
     isOpen: boolean;
     onClose: () => void;
+  /* eslint-disable-next-line */
     onDelete: (id: string) => void;
     point: TPoint;
 };
@@ -44,11 +45,13 @@ export default function FeedbackModal({
   };
 
   const onDeleteHandler = () => {
+    /* eslint-disable-next-line */
     const pswd = prompt('Enter password to delete this place', 'pswd');
 
     if (pswd === 'pswd') {
       onDelete(id);
     } else {
+      /* eslint-disable-next-line */
       alert('Wrong password');
     }
   };

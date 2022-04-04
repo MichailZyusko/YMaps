@@ -3,16 +3,18 @@ import { Input, Label } from './Components';
 import sendIcon from '../../assets/send.svg';
 
 type TProps = {
+  /* eslint-disable-next-line */
   onSubmit: (values: any) => void;
 };
 
 export default function FeedbackForm({ onSubmit }: TProps) {
   const onClickHandler = () => {
+    /* eslint-disable-next-line */
     const inputs = document.querySelector('form')?.elements;
 
     if (inputs) {
-      // @ts-ignore
-      const values = Array.from(inputs).reduce((acc: any, input: HTMLInputElement) => {
+      /* eslint-disable-next-line */
+      const values = Array.from(inputs).reduce((acc: any, input: any) => {
         if (input.name === 'rating') {
           if (input.checked) {
             acc[input.name] = input.value;
