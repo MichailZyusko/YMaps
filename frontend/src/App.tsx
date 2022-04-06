@@ -1,8 +1,8 @@
 import React from 'react';
-import MyMap from './components/Maps';
+import YMap from './components/Maps';
 
 function App() {
-  return <MyMap />;
+  return <YMap />;
 }
 
 export default App;

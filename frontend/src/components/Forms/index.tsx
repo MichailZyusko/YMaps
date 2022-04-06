@@ -1,4 +1,4 @@
-import CreationFrom from './creationForm';
-import FeedbackForm from './feedbackForm';
+import CreationFrom from './CreationFrom';
+import FeedbackForm from './FeedbackForm';
 
 export { CreationFrom, FeedbackForm };

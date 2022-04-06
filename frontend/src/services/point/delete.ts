@@ -5,8 +5,12 @@ type TProps = {
   id: string
 };
 
-export default async ({ id }: TProps): Promise<{ status: number }> => {
-  const { status } = (await axios.delete(`${url}/${id}`)) as { status: number };
+type TReturnValue = {
+  status: number
+};
+
+export default async ({ id }: TProps): Promise<TReturnValue> => {
+  const { status } = (await axios.delete(`${url}/${id}`)) as TReturnValue;
 
   return { status };
 };

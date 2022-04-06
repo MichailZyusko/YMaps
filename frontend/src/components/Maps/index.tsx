@@ -3,10 +3,10 @@ import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import geoJSON from 'geojson';
 import { defaultOptions } from '../../constants';
 import { FeedbackModal, CreationModal } from '../Modals';
-import { PointService } from '../../services';
+import PointService from '../../services';
 import Loader from '../Loader';
 import { TPoint } from '../../types';
-import { defaultPoint } from '../../stubs';
+import defaultPoint from '../../stubs';
 
 type TState = {
   isFeedbackModalOpen: boolean;
@@ -17,7 +17,7 @@ type TState = {
   coordinates: number[];
 };
 
-function MyMap() {
+function YMap() {
   const [state, setState] = useState<TState>({
     isFeedbackModalOpen: false,
     isCreationModalOpen: false,
@@ -77,14 +77,9 @@ function MyMap() {
   }, [state.isFeedbackModalOpen, state.points]);
 
   const onPointSelect = useCallback(async (id: string) => {
-    // setState({
-    //   ...state,
-    //   isLoading: true,
-    // });
     const point = await PointService.getById({ id });
     setState({
       ...state,
-      // isLoading: false,
       selectedPoint: point,
       isFeedbackModalOpen: true,
     });
@@ -137,4 +132,4 @@ function MyMap() {
   );
 }
 
-export default MyMap;
+export default YMap;

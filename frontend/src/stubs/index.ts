@@ -1,7 +1,6 @@
 import { TPoint } from '../types';
 
-/* eslint-disable-next-line */
-export const defaultPoint: TPoint = {
+export default {
   id: '',
   type: '',
   name: '',
@@ -16,4 +15,4 @@ export const defaultPoint: TPoint = {
     ],
   },
   coords: [0, 0],
-};
+} as TPoint;

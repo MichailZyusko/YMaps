@@ -6,21 +6,23 @@ type TProps = {
 };
 
 const ButtonContainer = styled.div`
-  margin-left: 30px;
-  width: 50px;
-  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  width: 50px;
+  height: 50px;
+  
+  margin-left: 30px;
   border-radius: 10px;
   background-color: lightgray;
-  cursor: pointer,
+  cursor: pointer;
 `;
 
 export default function SendButton({ onClick }: TProps) {
   return (
     <ButtonContainer onClick={onClick}>
-      <img src={sendIcon} />
+      <img src={sendIcon} alt="Send button" />
     </ButtonContainer>
   );
 }

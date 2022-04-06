@@ -8,7 +8,7 @@ export type TPoint = {
   id: string;
   type?: string;
   name?: string;
-  props?: {
+  props: {
     name: string;
     feedbacks: TFeedback[];
   };

@@ -11,7 +11,7 @@ type TProps = {
 const FeedbackContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: '15px'
+  margin-bottom: 15px;
 `;
 
 const MessageContainer = styled.div`
@@ -25,8 +25,8 @@ const AnimalContainer = styled.div`
 `;
 
 const Text = styled.div`
-  font-size: ${(props) => props?.style?.fontSize || '1.2'}em;
-  font-weight: ${(props) => props?.style?.fontWeight || '400'};
+  font-size: ${({ style }) => style?.fontSize || '1.2'}em;
+  font-weight: ${({ style }) => style?.fontWeight || '400'};
 `;
 
 const MessageHeader = styled.div`
@@ -53,10 +53,7 @@ export default function Feedback({ feedback }: TProps) {
           <Text>Anonimus {animal}</Text>
           <Text>{feedback.rating}</Text>
         </MessageHeader>
-        <Text style={{
-          fontWeight: '300',
-          fontSize: '1em',
-        }}>
+        <Text style={{ fontWeight: '300', fontSize: '1em' }}>
           {feedback.description}
         </Text>
       </MessageContainer>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import { calculateAverageRating } from '../../helpers';
-import { PointService } from '../../services';
+import PointService from '../../services';
 import { TFeedback, TPoint } from '../../types';
 import { SubmitButton } from '../Buttons';
 import {
@@ -15,7 +15,6 @@ Modal.setAppElement('#root');
 type TProps = {
     isOpen: boolean;
     onClose: () => void;
-  /* eslint-disable-next-line */
     onDelete: (id: string) => void;
     point: TPoint;
 };
@@ -24,34 +23,28 @@ export default function FeedbackModal({
   isOpen, onClose, onDelete, point,
 }: TProps) {
   const [feedbacks, setFeedbacks] = React.useState<TFeedback[]>([]);
-  // @ts-ignore
-  const { id, props: { name } } = point;
-
-  const rating = calculateAverageRating(feedbacks);
+  const [rating, setRating] = React.useState<string>('0');
+  const { id, props: { name } } = point as TPoint;
 
   useEffect(() => {
-    // @ts-ignore
     setFeedbacks(point.props.feedbacks);
+    setRating(calculateAverageRating(point.props.feedbacks));
   }, [point]);
 
-  // @ts-ignore
-  const onSubmit = async ({ feedback }) => {
+  const submitHandler = async ({ feedback }: { feedback: TFeedback }) => {
     const { status, updatedPoint } = await PointService.update({ id, feedback });
 
-    if (status === 201) {
-      // @ts-ignore
+    if (status === 201 && updatedPoint) {
       setFeedbacks(updatedPoint.props.feedbacks);
     }
   };
 
-  const onDeleteHandler = () => {
-    /* eslint-disable-next-line */
-    const pswd = prompt('Enter password to delete this place', 'pswd');
+  const deleteHandler = () => {
+    const password = prompt('Enter password to delete this place', 'password');
 
-    if (pswd === 'pswd') {
+    if (password === 'password') {
       onDelete(id);
     } else {
-      /* eslint-disable-next-line */
       alert('Wrong password');
     }
   };
@@ -67,10 +60,10 @@ export default function FeedbackModal({
           <hr style={{ width: '85%', margin: 'auto' }}/>
         <FeedbackContainer feedbacks={feedbacks} />
           <hr style={{ width: '85%', margin: 'auto' }}/>
-        <FeedbackForm onSubmit={onSubmit} />
+        <FeedbackForm onSubmit={submitHandler} />
       </ModalContainer>
       <FormButtonContainer>
-        <SubmitButton onClick={onDeleteHandler} style={{
+        <SubmitButton onClick={deleteHandler} style={{
           backgroundColor: 'red',
           fontWeight: '500',
           color: 'white',

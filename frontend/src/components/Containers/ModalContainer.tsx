@@ -1,18 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 
 type TProps = {
   children: React.ReactNode;
 };
 
+const Container = styled.div`
+  background-color: rgb(243, 243, 243);
+  border-radius: 20px;
+  padding: 30px;
+`;
+
 export default function ModalContainer({ children }: TProps) {
   return (
-    <div style={{
-      backgroundColor: 'rgba(243, 243, 243, 1)',
-      borderRadius: '20px',
-      padding: '30px',
-    }}
-    >
+    <Container>
       {children}
-    </div>
+    </Container>
   );
 }

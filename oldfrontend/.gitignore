@@ -1,8 +1,0 @@
-# dependencies
-/node_modules
-
-# other
-.DS_Store
-
-# Compiled Files
-build/

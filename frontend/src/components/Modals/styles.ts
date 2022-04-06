@@ -5,7 +5,6 @@ export default {
     right: 'auto',
     bottom: 'auto',
     width: '25%',
-    // height: '70vh',
     padding: 0,
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',

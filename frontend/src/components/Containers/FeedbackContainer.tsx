@@ -3,7 +3,7 @@ import { TFeedback } from '../../types';
 import Feedback from '../Feedback';
 
 type TProps = {
-    feedbacks: TFeedback[];
+  feedbacks: TFeedback[];
 }
 
 export default function FeedbackContainer({ feedbacks }: TProps) {

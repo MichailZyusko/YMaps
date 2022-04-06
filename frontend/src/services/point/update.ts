@@ -18,7 +18,7 @@ type ReturnValue = {
 };
 
 export default async ({ id, feedback }: TProps): Promise<ReturnValue> => {
-  const { status, data: updatedPoint } = (await axios.put(`${url}/${id}`, { feedback })) as Response;
+  const { status, data: updatedPoint } = (await axios.put(`${url}/${id}`, feedback)) as Response;
 
   return { status, updatedPoint };
 };

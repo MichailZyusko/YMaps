@@ -2,16 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import './index.css';
 
-// const Error = styled.div.attrs((props) => ({
-//   ...props,
-// }))`
-//   color: red;
-//   font-size: 12px;
-//   margin-top: 5px;
-// `;
-
 const Item = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: ${({ style }) => style?.marginBottom || 20}px;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -71,30 +63,26 @@ export const CustomTextArea = styled.textarea.attrs((props) => ({
 `;
 
 type TProps = {
-  label: string;
+  label?: string;
   name: string;
   placeholder?: string;
-  style?: React.CSSProperties;
 }
 
 export class Input {
-  // TODO Add error message
   static Text({ label, name, placeholder }: TProps) {
     return (
       <Item>
         <Label htmlFor={name}>{label}</Label>
-        <CustomInput type="text" name={name} placeholder={placeholder} defaultValue="1111111" />
+        <CustomInput type="text" name={name} placeholder={placeholder} />
       </Item>
     );
   }
 
-  static TextArea({
-    label, name, placeholder, style,
-  }: TProps) {
+  static TextArea({ label, name, placeholder }: TProps) {
     return (
-      <Item style={style}>
+      <Item style={{ marginBottom: 0 }}>
         {label && <Label htmlFor={name}>{label}</Label>}
-        <CustomTextArea name={name} placeholder={placeholder} defaultValue="22222222" />
+        <CustomTextArea name={name} placeholder={placeholder} />
       </Item>
     );
   }

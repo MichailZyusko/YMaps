@@ -6,8 +6,18 @@ type TProps = {
   data: TPoint;
 };
 
-export default async ({ data }: TProps): Promise<{ status: number, point: TPoint }> => {
-  const { data: point, status } = (await axios.post(url, data) as { data: TPoint, status: number });
+type TResponse = {
+  data: TPoint;
+  status: number;
+};
+
+type TReturnValue = {
+  point: TPoint;
+  status: number;
+};
+
+export default async ({ data }: TProps): Promise<TReturnValue> => {
+  const { data: point, status } = (await axios.post(url, data) as TResponse);
 
   return { status, point };
 };
