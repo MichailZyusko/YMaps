@@ -36,6 +36,7 @@ export default function FeedbackModal({
 
     if (status === 201 && updatedPoint) {
       setFeedbacks(updatedPoint.props.feedbacks);
+      setRating(calculateAverageRating(updatedPoint.props.feedbacks));
     }
   };
 
