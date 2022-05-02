@@ -1,115 +1,69 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import geoJSON from 'geojson';
 import { defaultOptions } from '../../constants';
-import { FeedbackModal, CreationModal } from '../Modals';
+import Modal from '../Modals';
 import PointService from '../../services';
-import Loader from '../Loader';
-import { TPoint } from '../../types';
-import defaultPoint from '../../stubs';
-
-type TState = {
-  isFeedbackModalOpen: boolean;
-  isCreationModalOpen: boolean;
-  isLoading: boolean;
-  points: TPoint[];
-  selectedPoint: TPoint;
-  coordinates: number[];
-};
+import {
+  useFeedbackModalDispatch, useCreationModalDispatch, useMapSelector, useMapDispatch,
+} from '../../redux/hooks';
+import { closeFeedbackModal, openFeedbackModal } from '../Modals/FeedbackModal/slice';
+import { closeCreationModal, openCreationModal } from '../Modals/CreationModal/slice';
+import { selectMap, setCoordinates, setPoints } from './slice';
 
 function YMap() {
-  const [state, setState] = useState<TState>({
-    isFeedbackModalOpen: false,
-    isCreationModalOpen: false,
-    isLoading: false,
-    selectedPoint: defaultPoint,
-    points: [],
-    coordinates: [],
-  });
+  const { points, coordinates } = useMapSelector(selectMap);
 
-  const onCloseCreationModal = useCallback(() => {
-    setState({ ...state, isCreationModalOpen: false });
-  }, [state.isCreationModalOpen]);
+  const feedbackModalDispatch = useFeedbackModalDispatch();
+  const creationModalDispatch = useCreationModalDispatch();
+  const mapDispatch = useMapDispatch();
 
-  const onCloseFeedbackModal = useCallback(() => {
-    setState({ ...state, isFeedbackModalOpen: false });
-  }, [state.isFeedbackModalOpen]);
+  const onLoad = async () => {
+    // eslint-disable-next-line no-underscore-dangle
+    const _points = await PointService.get();
 
-  const onLoad = useCallback(async () => {
-    const points = await PointService.get();
+    mapDispatch(setPoints(_points));
+  };
 
-    setState({
-      ...state,
-      points,
-      isLoading: false,
-    });
-  }, []);
-
-  const onSubmit = useCallback(async (data : Record<string, string>) => {
+  const onSubmit = async (data : Record<string, string>) => {
     // @ts-ignore
     const geoObject = geoJSON.parse({
       ...data,
-      lat: state.coordinates[1],
-      lng: state.coordinates[0],
+      lat: coordinates[1],
+      lng: coordinates[0],
     }, { Point: ['lat', 'lng'] });
 
     const { status, point } = await PointService.create({ data: geoObject });
+    creationModalDispatch(closeCreationModal());
 
     if (status === 201) {
-      setState({
-        ...state,
-        points: [...state.points, point],
-        isCreationModalOpen: false,
-      });
+      mapDispatch(setPoints([...points, point]));
     }
-  }, [state.isCreationModalOpen, state.points]);
+  };
 
-  const onDelete = useCallback(async (id : string) => {
+  const onDelete = async (id : string) => {
     const { status } = await PointService.remove({ id });
+    feedbackModalDispatch(closeFeedbackModal());
 
     if (status === 204) {
-      setState({
-        ...state,
-        isFeedbackModalOpen: false,
-        points: state.points.filter((point) => point.id !== id),
-      });
+      mapDispatch(setPoints(points.filter((point) => point.id !== id)));
     }
-  }, [state.isFeedbackModalOpen, state.points]);
+  };
 
-  const onPointSelect = useCallback(async (id: string) => {
+  const onPointSelect = async (id: string) => {
     const point = await PointService.getById({ id });
-    setState({
-      ...state,
-      selectedPoint: point,
-      isFeedbackModalOpen: true,
-    });
-  }, [state.isFeedbackModalOpen, state.points]);
+    feedbackModalDispatch(openFeedbackModal(point));
+  };
 
-  const onPointCreate = useCallback((e: any) => {
-    setState({
-      ...state,
-      coordinates: e.get('coords'),
-      isCreationModalOpen: true,
-    });
-  }, [state.isCreationModalOpen, state.points]);
-
-  if (state.isLoading) {
-    return <Loader />;
-  }
+  const onPointCreate = (e: any) => {
+    mapDispatch(setCoordinates(e.get('coords')));
+    creationModalDispatch(openCreationModal());
+  };
 
   return (
     <YMaps>
-      <CreationModal
-        isOpen={state.isCreationModalOpen}
-        onClose={onCloseCreationModal}
-        onSubmit={onSubmit}
-      />
-      <FeedbackModal
-        isOpen={state.isFeedbackModalOpen}
-        onClose={onCloseFeedbackModal}
-        onDelete={onDelete}
-        point={state.selectedPoint}
-      />
+      <Modal.Creation onSubmit={onSubmit}/>
+      <Modal.Feedback onDelete={onDelete}/>
       <Map
         defaultState={{ center: [53.90, 27.56], zoom: 12 }}
         width="100wh"
@@ -118,11 +72,11 @@ function YMap() {
         onContextMenu={(e: any) => onPointCreate(e)}
         modules={['geoObject.addon.hint']}
       >
-        {state.points.map(({ id, name, coords }: any) => (
+        {points.map(({ id, name, coords }: any) => (
           <Placemark
             key={id}
             geometry={coords}
-            options={defaultOptions}
+            options={defaultOptions()}
             properties={{ hintContent: name }}
             onClick={() => onPointSelect(id)}
           />

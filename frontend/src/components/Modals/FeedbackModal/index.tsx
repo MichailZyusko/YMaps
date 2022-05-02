@@ -1,42 +1,36 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
-import { calculateAverageRating } from '../../helpers';
-import PointService from '../../services';
-import { TFeedback, TPoint } from '../../types';
-import { SubmitButton } from '../Buttons';
+import PointService from '../../../services';
+import { TFeedback, TPoint } from '../../../types';
+import { SubmitButton } from '../../Buttons';
 import {
   PlaceHeaderContainer, ModalContainer, FormButtonContainer, FeedbackContainer,
-} from '../Containers';
-import { FeedbackForm } from '../Forms';
-import style from './styles';
+} from '../../Containers';
+import { FeedbackForm } from '../../Forms';
+import style from '../styles';
+import { useFeedbackModalDispatch, useFeedbackModalSelector } from '../../../redux/hooks';
+import { selectFeedbackModal, closeFeedbackModal, updateFeedbackModal } from './slice';
+import { calculateAverageRating } from '../../../helpers';
 
 Modal.setAppElement('#root');
 
-type TProps = {
-    isOpen: boolean;
-    onClose: () => void;
-    onDelete: (id: string) => void;
-    point: TPoint;
-};
+type TProps = { onDelete: (id: string) => void};
 
-export default function FeedbackModal({
-  isOpen, onClose, onDelete, point,
-}: TProps) {
-  const [feedbacks, setFeedbacks] = React.useState<TFeedback[]>([]);
-  const [rating, setRating] = React.useState<string>('0');
-  const { id, props: { name } } = point as TPoint;
+export default function FeedbackModal({ onDelete }: TProps) {
+  const {
+    isOpen, point,
+  } = useFeedbackModalSelector(selectFeedbackModal);
+  const dispatch = useFeedbackModalDispatch();
 
-  useEffect(() => {
-    setFeedbacks(point.props.feedbacks);
-    setRating(calculateAverageRating(point.props.feedbacks));
-  }, [point]);
+  if (!isOpen) return null;
+  const { id, props: { name, feedbacks } } = point as TPoint;
 
   const submitHandler = async ({ feedback }: { feedback: TFeedback }) => {
     const { status, updatedPoint } = await PointService.update({ id, feedback });
 
+    // TODO: FIXME
     if (status === 201 && updatedPoint) {
-      setFeedbacks(updatedPoint.props.feedbacks);
-      setRating(calculateAverageRating(updatedPoint.props.feedbacks));
+      dispatch(updateFeedbackModal(updatedPoint.props.feedbacks));
     }
   };
 
@@ -53,11 +47,14 @@ export default function FeedbackModal({
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onClose}
+      onRequestClose={() => dispatch(closeFeedbackModal())}
       style={style}
     >
       <ModalContainer>
-        <PlaceHeaderContainer placeName={name} rating={rating} />
+        <PlaceHeaderContainer
+          placeName={name}
+          rating={calculateAverageRating(feedbacks)}
+        />
           <hr style={{ width: '85%', margin: 'auto' }}/>
         <FeedbackContainer feedbacks={feedbacks} />
           <hr style={{ width: '85%', margin: 'auto' }}/>
