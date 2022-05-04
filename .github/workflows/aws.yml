@@ -11,6 +11,9 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ../../backend
     steps:
     - uses: actions/checkout@v2
     - name: Setup Node.js '16.x'
@@ -18,6 +21,7 @@ jobs:
       with:
         node-version: '16.x'
     - name: Serverless deploy
+    
       uses: serverless/github-action@v3
       with:
         args: deploy
