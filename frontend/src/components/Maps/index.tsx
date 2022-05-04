@@ -13,6 +13,7 @@ import {
   useMapSelector,
   useMapDispatch,
 } from '../../redux/hooks';
+import { TPoint } from '../../types';
 
 function YMap() {
   const { points, coordinates } = useMapSelector(selectMap);
@@ -49,7 +50,7 @@ function YMap() {
     feedbackModalDispatch(closeFeedbackModal());
 
     if (status === 204) {
-      mapDispatch(setPoints(points.filter((point) => point.id !== id)));
+      mapDispatch(setPoints(points.filter((point: TPoint) => point.id !== id)));
     }
   };
 

@@ -4,7 +4,9 @@ export default {
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    // width: '25%',
+    width: '500px',
+    'min-width': '350px',
+    'max-width': '600px',
     padding: 0,
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
@@ -12,6 +14,6 @@ export default {
     border: 'none',
   },
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
 };

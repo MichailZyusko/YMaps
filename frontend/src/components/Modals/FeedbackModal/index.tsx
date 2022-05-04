@@ -19,6 +19,7 @@ export default function FeedbackModal({ onDelete }: TProps) {
   const dispatch = useFeedbackModalDispatch();
 
   if (!isOpen) return null;
+
   const { id, props: { name, feedbacks, type } } = point as TPoint;
 
   const submitHandler = async ({ feedback }: { feedback: TFeedback }) => {
@@ -31,9 +32,9 @@ export default function FeedbackModal({ onDelete }: TProps) {
   };
 
   const deleteHandler = () => {
-    const password = prompt('Enter password to delete this place', 'password');
+    const password = prompt('Enter password to delete this place');
 
-    if (password === 'password') {
+    if (password === 'admin') {
       onDelete(id);
     } else {
       alert('Wrong password');

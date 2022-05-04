@@ -1,4 +1,4 @@
-# This workflow will push code to AWS Lambda Function using serveless framework
+# This workflow will push code to AWS Lambda Function using serverless framework
 
 name: Deploy master branch
 

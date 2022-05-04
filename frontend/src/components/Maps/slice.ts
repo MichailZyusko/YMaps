@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../redux/types';
 import { TPoint } from '../../types';
 
 export interface MapsState {
@@ -8,7 +7,6 @@ export interface MapsState {
     points: TPoint[];
     coordinates: number[];
   };
-  // status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: MapsState = {
@@ -16,7 +14,6 @@ const initialState: MapsState = {
     points: [],
     coordinates: [],
   },
-  // status: 'loading',
 };
 
 export const mapSlice = createSlice({
@@ -29,14 +26,11 @@ export const mapSlice = createSlice({
     setCoordinates: (state, action) => {
       state.value.coordinates = action.payload;
     },
-    // setStatus: (state, action) => {
-    //   state.status = action.payload;
-    // },
   },
 });
 
 export const { setPoints, setCoordinates } = mapSlice.actions;
 
-export const selectMap = (state: RootState) => state.map.value;
+export const selectMap = (state: any) => state.map.value;
 
 export const mapReducer = mapSlice.reducer;
