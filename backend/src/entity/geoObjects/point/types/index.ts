@@ -1,4 +1,4 @@
-import { PointType } from '../constants/enums';
+export type PointType = '🌯'| '🍔'| '🌭'| '🍟'| '🍕'| '🍗'| '🍝'| '🍣'| '☕️'| '🍦';
 
 export type TFeedback = {
   id: string;
@@ -8,7 +8,7 @@ export type TFeedback = {
 
 export type TPoint = {
   id: string;
-  type?: PointType,
+  type?: PointType;
   name?: string;
   props?: {
     name?: string;

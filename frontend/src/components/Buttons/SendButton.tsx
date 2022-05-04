@@ -15,7 +15,8 @@ const ButtonContainer = styled.div`
   
   margin-left: 30px;
   border-radius: 10px;
-  background-color: lightgray;
+  background-color: #ffe400;
+  border: 1px solid black;
   cursor: pointer;
 `;
 

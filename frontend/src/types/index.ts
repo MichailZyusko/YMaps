@@ -11,6 +11,7 @@ export type TPoint = {
   props: {
     name: string;
     feedbacks: TFeedback[];
+    type: string;
   };
   coords: [number, number];
 };

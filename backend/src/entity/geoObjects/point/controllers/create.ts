@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { v4 as uuid } from 'uuid';
-import db from '../../../../db/instance';
-import { TMappedPoint, TPoint } from '../types';
+import DB from '../../../../db/instance';
+import { TMappedPoint } from '../types';
 import ApiError from '../../../../errors/ApiError';
 
 class DTO {
@@ -23,6 +23,7 @@ class DTO {
             rating: data.properties.rating,
           },
         ],
+        type: data.properties.type,
       },
     });
   }
@@ -31,7 +32,7 @@ class DTO {
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const point = new DTO(req.body) as TMappedPoint;
-    const isSuccessfullyCreated: boolean = await db.GeoObjects.save(point);
+    const isSuccessfullyCreated: boolean = await DB.GeoObjects.save({ point });
 
     if (!isSuccessfullyCreated) {
       throw new ApiError(400, 'Invalid data');
@@ -41,6 +42,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     res.status(201).json({
       id: point.id,
+      type: pointData.props.type,
       coords: pointData.geometry.coordinates,
       name: pointData.props.name,
     });

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import db from '../../../../db/instance';
+import DB from '../../../../db/instance';
 import ApiError from '../../../../errors/ApiError';
 
 type TParams = {
@@ -9,7 +9,7 @@ type TParams = {
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params as TParams;
-    const isSuccessfullyDeleted: boolean = await db.GeoObjects.deleteById({ id });
+    const isSuccessfullyDeleted: boolean = await DB.GeoObjects.deleteById({ id });
 
     if (!isSuccessfullyDeleted) {
       throw new ApiError(404, 'Placemark not found');

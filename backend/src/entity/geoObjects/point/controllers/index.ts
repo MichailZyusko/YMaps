@@ -4,10 +4,16 @@ import getPointById from './getById';
 import updatePoint from './update';
 import deletePoint from './delete';
 
-export {
-  createPoint,
-  getPoints,
-  getPointById,
-  updatePoint,
-  deletePoint,
-};
+class PointController {
+  public create = createPoint;
+
+  public get = getPoints;
+
+  public getById = getPointById;
+
+  public update = updatePoint;
+
+  public delete = deletePoint;
+}
+
+export default new PointController();

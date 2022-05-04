@@ -3,7 +3,7 @@ import { animals } from '../constants';
 
 export const calculateAverageRating = (feedbacks: TFeedback[]): string => (feedbacks
   .reduce((acc, curr) => acc + +curr.rating, 0) / feedbacks.length || 0)
-  .toFixed(2);
+  .toFixed(1);
 
 // eslint-disable-next-line no-bitwise
 export const getRandomAnimal = (): string => animals[~~(Math.random() * animals.length)];

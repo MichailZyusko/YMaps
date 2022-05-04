@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input, Label } from './Components';
 import { getFormData } from '../../helpers';
-import { SendButton } from '../Buttons';
+import Buttons from '../Buttons';
 
 type TProps = {
   onSubmit: (values: any) => void;
@@ -44,7 +44,7 @@ export default function FeedbackForm({ onSubmit }: TProps) {
           name="description"
           placeholder="Leave us your feedback. It's important to us"
         />
-        <SendButton onClick={onClickHandler} />
+        <Buttons.Send onClick={onClickHandler} />
       </Container>
     </Form>
   );

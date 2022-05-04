@@ -1,56 +1,45 @@
 import mysql from 'mysql2';
+import { Pool } from 'mysql2/promise';
 import config from '../../config';
-import GeoObjects from './models/GeoObjects';
+import GeoObjects from './models/geoObjects/GeoObjects';
 
-const {
-  db: {
-    host, user, password, database, port,
-  },
-} = config;
+const { db: configuration } = config;
 
-const initSQLQuery = `
-  CREATE DATABASE IF NOT EXISTS ${database};
-  
-  use ${database};
-  
-  CREATE TABLE IF NOT EXISTS GeoObjects (
+const createDB = `
+  CREATE DATABASE IF NOT EXISTS ${configuration.database};
+`;
+
+const createTable = `
+  CREATE TABLE IF NOT EXISTS GeoObjects(
     id varchar(36) PRIMARY KEY,
     data JSON
   );
 `;
 
-type DBInstance = DB | null;
-
 class DB {
-  private static instance: DBInstance = null;
+  // eslint-disable-next-line no-use-before-define
+  protected static instance: DB;
 
-  private static connection: mysql.Connection;
+  protected static pool: Pool;
 
   public GeoObjects: GeoObjects;
 
   constructor() {
     if (DB.instance) {
-      throw new Error('Error: Instantiation failed: Use DB.getInstance() instead of new.');
+      throw new Error('[error]: Can\'t create more than one instance of DB');
     }
 
-    DB.instance = this;
-    // @ts-ignore
-    DB.connection = mysql.createConnection({
-      port,
-      host,
-      user,
-      password,
-      database,
-    }).promise();
-    this.GeoObjects = new GeoObjects(DB.connection);
+    DB.pool = (mysql.createPool(configuration)).promise();
+    DB.pool.query(createDB).then(() => {
+      DB.pool.query(createTable).then(() => {
+        DB.instance = this;
+        console.log('DB initialized');
+      }).catch((err: any) => {
+        console.log(err);
+      });
+    });
 
-    // DB.connection.query(initSQLQuery)
-    //   // @ts-ignore
-    //   .then(() => {
-    //     console.log('DB initialized');
-    //   }).catch((err: any) => {
-    //     console.log(err);
-    //   });
+    this.GeoObjects = new GeoObjects(DB.pool);
   }
 }
 

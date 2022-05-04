@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { v4 as uuid } from 'uuid';
-import db from '../../../../db/instance';
+import DB from '../../../../db/instance';
 import ApiError from '../../../../errors/ApiError';
 
 type TUpdate = {
@@ -26,13 +26,13 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const feedback = new DTO(req.body);
-    const isSuccessfullyUpdated = await db.GeoObjects.findByIdAndUpdate({ id, feedback });
+    const isSuccessfullyUpdated = await DB.GeoObjects.findByIdAndUpdate({ id, feedback });
 
     if (!isSuccessfullyUpdated) {
       throw new ApiError(404, 'Point not found');
     }
 
-    const updatedPoint = await db.GeoObjects.findById({ id });
+    const updatedPoint = await DB.GeoObjects.findById({ id });
 
     res.status(201).json(updatedPoint);
   } catch (error: any) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { SubmitButton } from '../../Buttons';
-import { FormButtonContainer, ModalContainer } from '../../Containers';
-import { CreationFrom } from '../../Forms';
+import Buttons from '../../Buttons';
+import Containers from '../../Containers';
+import Forms from '../../Forms';
 import style from '../styles';
 import { getFormData } from '../../../helpers';
 import { useCreationModalDispatch, useCreationModalSelector } from '../../../redux/hooks';
@@ -29,12 +29,12 @@ export default function CreationModal({ onSubmit }: TProps) {
       onRequestClose={() => dispatch(closeCreationModal())}
       style={style}
     >
-      <ModalContainer>
-        <CreationFrom />
-      </ModalContainer>
-      <FormButtonContainer>
-        <SubmitButton onClick={clickHandler}>Submit</SubmitButton>
-      </FormButtonContainer>
+      <Containers.Modal>
+        <Forms.Creation />
+      </Containers.Modal>
+      <Containers.FormButton>
+        <Buttons.Submit onClick={clickHandler}>Submit</Buttons.Submit>
+      </Containers.FormButton>
     </Modal>
   );
 }

@@ -66,6 +66,7 @@ type TProps = {
   label?: string;
   name: string;
   placeholder?: string;
+  list?: Array<{id: number, value: string}>;
 }
 
 export class Input {
@@ -74,6 +75,22 @@ export class Input {
       <Item>
         <Label htmlFor={name}>{label}</Label>
         <CustomInput type="text" name={name} placeholder={placeholder} />
+      </Item>
+    );
+  }
+
+  static Select({
+    label, name, placeholder, list,
+  }: TProps) {
+    return (
+      <Item>
+        <Label htmlFor={name}>{label}</Label>
+          <CustomInput type="text" name={name} placeholder={placeholder} list={`${name}List`} />
+          <datalist id={`${name}List`}>
+            {list?.map((item: any) => (
+              <option key={item.id} value={item.value}>{item.value}</option>
+            ))}
+          </datalist>
       </Item>
     );
   }

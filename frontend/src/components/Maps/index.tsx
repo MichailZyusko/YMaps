@@ -4,12 +4,15 @@ import geoJSON from 'geojson';
 import { defaultOptions } from '../../constants';
 import Modal from '../Modals';
 import PointService from '../../services';
-import {
-  useFeedbackModalDispatch, useCreationModalDispatch, useMapSelector, useMapDispatch,
-} from '../../redux/hooks';
 import { closeFeedbackModal, openFeedbackModal } from '../Modals/FeedbackModal/slice';
 import { closeCreationModal, openCreationModal } from '../Modals/CreationModal/slice';
 import { selectMap, setCoordinates, setPoints } from './slice';
+import {
+  useFeedbackModalDispatch,
+  useCreationModalDispatch,
+  useMapSelector,
+  useMapDispatch,
+} from '../../redux/hooks';
 
 function YMap() {
   const { points, coordinates } = useMapSelector(selectMap);
@@ -72,11 +75,13 @@ function YMap() {
         onContextMenu={(e: any) => onPointCreate(e)}
         modules={['geoObject.addon.hint']}
       >
-        {points.map(({ id, name, coords }: any) => (
+        {points.map(({
+          id, name, coords, type,
+        }: any) => (
           <Placemark
             key={id}
             geometry={coords}
-            options={defaultOptions()}
+            options={defaultOptions(type)}
             properties={{ hintContent: name }}
             onClick={() => onPointSelect(id)}
           />

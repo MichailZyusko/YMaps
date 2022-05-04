@@ -1,22 +1,16 @@
 import { Router } from 'express';
 
-import {
-  createPoint,
-  getPoints,
-  getPointById,
-  updatePoint,
-  deletePoint,
-} from '../controllers';
+import pointController from '../controllers';
 
 const router: Router = Router();
 
 router.route('/')
-  .get(getPoints)
-  .post(createPoint);
+  .get(pointController.get)
+  .post(pointController.create);
 
 router.route('/:id')
-  .get(getPointById)
-  .put(updatePoint)
-  .delete(deletePoint);
+  .get(pointController.getById)
+  .put(pointController.update)
+  .delete(pointController.delete);
 
 export default router;

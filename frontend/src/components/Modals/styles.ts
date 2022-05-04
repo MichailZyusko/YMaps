@@ -4,7 +4,7 @@ export default {
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    width: '25%',
+    // width: '25%',
     padding: 0,
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',

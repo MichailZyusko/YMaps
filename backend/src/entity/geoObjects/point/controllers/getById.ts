@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import db from '../../../../db/instance';
+import DB from '../../../../db/instance';
 import { TPoint } from '../types';
 
 type TParams = {
@@ -9,9 +9,9 @@ type TParams = {
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params as TParams;
-    const potint: TPoint = await db.GeoObjects.findById({ id });
+    const point: TPoint = await DB.GeoObjects.findById({ id });
 
-    res.status(201).json(potint);
+    res.status(200).json(point);
   } catch (error: any) {
     next(error);
   }

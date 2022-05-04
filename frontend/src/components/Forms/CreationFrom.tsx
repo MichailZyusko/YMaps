@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input } from './Components';
+import { foodList } from '../../constants';
 
 export default function CreationFrom() {
   return (
@@ -8,6 +9,12 @@ export default function CreationFrom() {
         label="Name of the place"
         placeholder="Specify the name"
         name="name"
+      />
+      <Input.Select
+        name="type"
+        label="Type of the place"
+        placeholder={'Select the type'}
+        list={foodList}
       />
       <Input.TextArea
         label="Description"

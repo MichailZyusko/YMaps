@@ -4,6 +4,7 @@ import styled from 'styled-components';
 type TProps = {
   placeName: string;
   rating: string;
+  type: string;
 }
 
 const ComponentContainer = styled.div`
@@ -37,12 +38,12 @@ function Star() {
   );
 }
 
-export default function PlaceHeaderContainer({ placeName, rating }: TProps) {
+export default function PlaceHeaderContainer({ placeName, rating, type }: TProps) {
   return (
     <ComponentContainer>
-      <Text>{placeName}</Text>
+      <Text>{type} {placeName}</Text>
       <RatingContainer>
-        {rating}/5
+        {rating}/5.0
         <Star />
       </RatingContainer>
     </ComponentContainer>
