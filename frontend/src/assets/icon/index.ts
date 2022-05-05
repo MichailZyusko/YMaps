@@ -8,6 +8,7 @@ import SpaghettiIcon from './spaghetti_24px.png';
 import SushiIcon from './sushi_24px.png';
 import CoffeeIcon from './coffee_24px.png';
 import IceCreamIcon from './icecream_24px.png';
+import UnknownIcon from './unknown_24px.png';
 
 class Icons {
   public static Sawarma = SawarmaIcon;
@@ -29,6 +30,8 @@ class Icons {
   public static Coffee = CoffeeIcon;
 
   public static IceCream = IceCreamIcon;
+
+  public static Unknown = UnknownIcon;
 }
 
 export default Icons;

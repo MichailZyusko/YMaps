@@ -1,5 +1,5 @@
 import React from 'react';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import ClipLoader from 'react-spinners/ClipLoader';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -7,20 +7,16 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   
-  height: 100vh;
-  width: 100vw;
+  height: 400px;
+  width: 100%;
   
-  position: absolute;
-  top: 0;
-  left: 0;
-  
-  background-color: black;
+  background-color: rgb(243,243,243);
 `;
 
 export default function ClockSpinner() {
   return (
     <Container>
-      <ScaleLoader height={50} width={5} radius={5} margin={7} color="white" />
+      <ClipLoader size={50} color="#505050" />
     </Container>
   );
 }

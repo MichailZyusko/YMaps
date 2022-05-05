@@ -16,6 +16,8 @@ export default function CreationModal({ onSubmit }: TProps) {
   const { isOpen } = useCreationModalSelector(selectCreationModal);
   const dispatch = useCreationModalDispatch();
 
+  if (!isOpen) return null;
+
   const clickHandler = () => {
     const form = document.querySelector('form') as HTMLFormElement;
     const formData = getFormData(form);

@@ -29,11 +29,6 @@ const StyledButton = styled.button.attrs((props) => ({
   background-color: #ffe400;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
-
-  //&:hover {
-  //  background-color: #ffe400;
-  //  color: black;
-  //};
 `;
 
 export default function Button({ children, onClick, style }: TProps) {

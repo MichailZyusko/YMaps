@@ -28,7 +28,7 @@ export const url = 'https://5o3kijxvl4.execute-api.us-east-2.amazonaws.com/dev/a
 
 export const defaultOptions = (icon: string) => ({
   iconLayout: 'default#image',
-  iconImageHref: mapFoodToIcon[icon],
+  iconImageHref: mapFoodToIcon[icon] || Icons.Unknown,
   iconImageSize: [24, 24],
   iconImageOffset: [-12, -12],
 });

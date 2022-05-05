@@ -11,7 +11,7 @@ type TProps = {
 const FeedbackContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin: 0 15px 15px 15px;
 `;
 
 const MessageContainer = styled.div`
@@ -33,7 +33,25 @@ const MessageHeader = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
+  align-items: center;
 `;
+
+function Star() {
+  return (
+    <div className="rating-css">
+      <div className="star-icon">
+        <label className="fa fa-star" />
+      </div>
+    </div>
+  );
+}
+
+const Rating = ({ rating }: { rating: number }) => (
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <Text style={{ marginRight: '5px', marginTop: '5px' }}>{rating}</Text>
+    <Star />
+  </span>
+);
 
 export default function Feedback({ feedback }: TProps) {
   const animal = getRandomAnimal();
@@ -51,7 +69,7 @@ export default function Feedback({ feedback }: TProps) {
       <MessageContainer>
         <MessageHeader>
           <Text>Anonimus {animal}</Text>
-          <Text>{feedback.rating}</Text>
+          <Rating rating={feedback.rating} />
         </MessageHeader>
         <Text style={{ fontWeight: '300', fontSize: '1em' }}>
           {feedback.description}

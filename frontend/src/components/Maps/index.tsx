@@ -23,10 +23,8 @@ function YMap() {
   const mapDispatch = useMapDispatch();
 
   const onLoad = async () => {
-    // eslint-disable-next-line no-underscore-dangle
-    const _points = await PointService.get();
-
-    mapDispatch(setPoints(_points));
+    const pointsData = await PointService.get();
+    mapDispatch(setPoints(pointsData));
   };
 
   const onSubmit = async (data : Record<string, string>) => {
