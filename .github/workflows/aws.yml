@@ -17,10 +17,7 @@ jobs:
       with:
         node-version: '16.x'
     - name: Install dependencies
-      working-directory: /home/runner/work/YMaps/backend
-      run: |
-        npm install
-        npm i serverless -g
+      run: npm ci
     - name: Serverless deploy
       uses: serverless/github-action@v3
       with:
