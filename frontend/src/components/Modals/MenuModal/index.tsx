@@ -3,15 +3,14 @@ import Modal from 'react-modal';
 import { Carousel } from 'react-responsive-carousel';
 import Containers from '../../Containers';
 import style from './styles';
-import Gifs from '../../../assets/gif';
 import { useFeedbackModalDispatch, useMenuModalSelector } from '../../../redux/hooks';
 import { closeMenuModal, selectMenuModal } from './slice';
-import Gif from '../../Gifs';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-// eslint-disable-next-line import/no-named-as-default
 import { Screen, P } from './Components';
-import Avatar from '../../../assets/pictures/avatar.png';
 import Buttons from '../../Buttons';
+import Components from '../../General';
+import Gif from '../../Gifs';
+import Gifs from '../../../assets/gif';
 
 Modal.setAppElement('#root');
 
@@ -31,7 +30,7 @@ export default function MenuModal() {
           width={'100%'}
           emulateTouch
           stopOnHover
-          // autoPlay
+          autoPlay
           interval={3000}
           showThumbs={false}
           showStatus={false}
@@ -46,59 +45,48 @@ export default function MenuModal() {
               The creator of this program is Mikhail Zyusko,
               a third-year student of the ISEI.
             </P>
-            <img
-              src={Avatar}
-              alt={'Michail Zyusko avatar'}
-              style={{
-                margin: '40px 0 0 0',
-                borderRadius: '50%',
-                width: '300px',
-                height: '300px',
-              }}/>
+            <Components.Avatar />
           </Screen>
           <Screen header={'About project'}>
-            <P>This project was created as part of a course project on GIS</P>
+            <P>This project was created as part of a course project on GIS.</P>
+            <br />
+            <P>
+              The main idea of the project is to create an
+              interactive map of street food establishments.
+              The project was created based on the YandexMaps API
+              using modern React + Redux frontend
+              ibraries.
+              The language used was TypeScript.
+              On the server side NodeJS is used,
+              the database - MySQL and as a cloud provider was used AWS and PaaS Vercel.
+            </P>
+            <br />
             <P>The full source code of the program can be found&nbsp;
               <a href={'https://github.com/MichailZyusko/YMaps'} target={'_blank'}>here</a>
             </P>
           </Screen>
           <Screen header={'Instruction'}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
+            <Containers.Gif>
               <Gif
                 src={Gifs.creation}
                 alt={'creation'}
                 header={'Create new Point'}
                 description={'Click RMB on the map to create a new point'}
               />
-            </div>
+            </Containers.Gif>
           </Screen>
           <Screen header={'Instruction'}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
+            <Containers.Gif>
               <Gif
                 src={Gifs.leaveFeedback}
                 alt={'leaveFeedback'}
                 header={'Leave Feedback'}
                 description={'Click LMB on the map to leave feedback'}
               />
-            </div>
+            </Containers.Gif>
           </Screen>
           <Screen header={'Conclusion'}>
-            <div style={{
-              display: 'flex',
-              height: '80%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-             <h1 onClick={() => dispatch(closeMenuModal())}>Lets Go!</h1>
-            </div>
+            <h1>Lets Go!</h1>
           </Screen>
         </Carousel>
       </Containers.Modal>

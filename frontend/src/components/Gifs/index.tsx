@@ -1,6 +1,16 @@
 import styled from 'styled-components';
 import React from 'react';
-import { P } from '../Modals/MenuModal/Components';
+
+const P = styled.p`
+  width: 75%;
+  font-weight: 400;
+  font-size: 1.2em;
+  color: #505050;
+  
+  @media (max-width: 500px) {  
+    width: 90%; 
+  }
+`;
 
 const Img = styled.img`
   max-width: 100%;

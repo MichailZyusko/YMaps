@@ -14,6 +14,6 @@ export default {
     border: 'none',
   },
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
   },
 };

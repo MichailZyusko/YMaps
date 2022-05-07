@@ -8,10 +8,13 @@ type TProps = {
 }
 
 const Container = styled.div`
-  max-height: 400px;
-  height: 400px;
+  height: 30vh;
   overflow-y: auto;
   margin: 20px 0;
+  
+  //@media (max-width: 500px) {
+  //  height: 30vh;
+  //}
 `;
 
 export default function FeedbackContainer({ feedbacks }: TProps) {

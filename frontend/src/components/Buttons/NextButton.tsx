@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 
 const StyledButton = styled.button`
-position: absolute;
+  position: absolute;
   bottom: -20px;
   right: 0;
 
@@ -29,6 +29,15 @@ position: absolute;
   transition: all 0.4s ease-in-out;
   
   z-index: 2;
+  
+  @media (max-width: 500px){
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 10px auto 0 auto;
+    padding: 5px;
+  }
 `;
 
 type TProps = {
