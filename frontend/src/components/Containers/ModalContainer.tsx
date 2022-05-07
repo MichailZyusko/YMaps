@@ -8,7 +8,7 @@ type TProps = {
 const Container = styled.div`
   background-color: rgb(243, 243, 243);
   border-radius: 20px;
-  padding: 30px;
+  padding: 2rem;
 `;
 
 export default function ModalContainer({ children }: TProps) {

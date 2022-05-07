@@ -4,12 +4,23 @@ name: Deploy main branch
 
 on:
   push:
+<<<<<<< Updated upstream
     branches: [ main ]
+=======
+    branches:
+      - main
+>>>>>>> Stashed changes
 
 jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
+<<<<<<< Updated upstream
+=======
+    defaults:
+      run:
+        working-directory: /home/runner/work/YMaps/backend
+>>>>>>> Stashed changes
     steps:
     - uses: actions/checkout@v2
     - name: Setup Node.js '16.x'
@@ -17,8 +28,14 @@ jobs:
       with:
         node-version: '16.x'
     - name: Install dependencies
+<<<<<<< Updated upstream
       run: npm ci
     - name: Serverless deploy
+=======
+      run: npm install
+    - name: Serverless deploy
+
+>>>>>>> Stashed changes
       uses: serverless/github-action@v3
       with:
         args: deploy

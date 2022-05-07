@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import sendIcon from '../../assets/send.svg';
+import sendIcon from '../../assets/icon/send.svg';
 
 type TProps = {
   onClick: () => void;
