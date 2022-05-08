@@ -32,10 +32,9 @@ const StyledButton = styled.button`
   
   @media (max-width: 500px){
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 10px auto 0 auto;
+    bottom: -1vh;
+    right: 3vw;
+    width: 17vw;
     padding: 5px;
   }
 `;

@@ -8,13 +8,13 @@ type TProps = {
 }
 
 const Container = styled.div`
-  height: 30vh;
+  height: clamp(20vh, 25vh, 30vh);
   overflow-y: auto;
   margin: 20px 0;
   
-  //@media (max-width: 500px) {
-  //  height: 30vh;
-  //}
+  @media (max-width: 500px) {
+    height: clamp(20vh, 25vh, 30vh);
+  }
 `;
 
 export default function FeedbackContainer({ feedbacks }: TProps) {

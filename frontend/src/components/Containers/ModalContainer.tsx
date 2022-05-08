@@ -11,7 +11,8 @@ const Container = styled.div`
   padding: 2rem 2rem 1rem 2rem;
 
   @media (max-width: 500px) {
-    height: 80vh;
+    height: clamp(70vh, fit-content, 80vh);
+    width: clamp(68vw, 73vw, 75vw);
   }
 `;
 

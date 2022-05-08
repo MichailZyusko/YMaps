@@ -4,7 +4,7 @@ export default {
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    width: window.innerWidth < 500 ? '90%' : '400px',
+    width: 'clamp(20vw, 400px, 30vw);',
     padding: 0,
     marginTop: window.innerWidth < 500 ? '1rem' : '0',
     marginRight: '-50%',
