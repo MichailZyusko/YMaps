@@ -47,7 +47,7 @@ function Star() {
 }
 
 const Rating = ({ rating }: { rating: number }) => (
-  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+  <span style={{ display: 'inline-flex', alignItems: 'center', marginLeft: '10px' }}>
     <Text style={{ marginRight: '5px', marginTop: '5px' }}>{rating}</Text>
     <Star />
   </span>

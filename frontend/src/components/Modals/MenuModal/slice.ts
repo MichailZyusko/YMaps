@@ -9,8 +9,7 @@ export interface MenuModalState {
 
 const initialState: MenuModalState = {
   value: {
-    isOpen: true,
-    // window.localStorage.getItem('isFirstStart') === null
+    isOpen: window.localStorage.getItem('isFirstStart') === null,
   },
 };
 
