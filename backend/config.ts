@@ -3,22 +3,17 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 type Environment = {
-    app: {
-        port: number;
-        host: string;
-    };
-    db: {
-        host: string;
-        port: number;
-        user: string;
-        password: string;
-        database: string;
-    };
-    email: {
-      from: string;
-      to: string;
-      pass: string;
-    }
+  app: {
+    port: number;
+    host: string;
+  };
+  db: {
+    host: string;
+    port: number;
+    user: string;
+    password: string;
+    database: string;
+  };
 };
 type Config = Record<string, Environment>;
 
@@ -33,11 +28,6 @@ const dev: Environment = {
     user: process.env.DB_USER ?? '',
     password: process.env.DB_PASSWORD ?? '',
     database: process.env.DB_NAME ?? '',
-  },
-  email: {
-    from: process.env.EMAIL_FROM_USER ?? '',
-    to: process.env.EMAIL_TO_USER ?? '',
-    pass: process.env.EMAIL_PASSWORD ?? '',
   },
 };
 

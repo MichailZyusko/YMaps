@@ -9,7 +9,7 @@ export interface MenuModalState {
 
 const initialState: MenuModalState = {
   value: {
-    isOpen: window.localStorage.getItem('isFirstStart') === null,
+    isOpen: false,
   },
 };
 
@@ -19,7 +19,7 @@ export const menuModalSlice = createSlice({
   reducers: {
     closeMenuModal: (state) => {
       state.value.isOpen = false;
-      window.localStorage.setItem('isFirstStart', 'false');
+      // window.localStorage.setItem('isFirstStart', 'false');
     },
   },
 });

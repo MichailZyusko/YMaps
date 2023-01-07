@@ -24,7 +24,7 @@ export const animals = ['alligator', 'anteater', 'armadillo', 'axolotl',
   'rhino', 'sheep', 'shrew', 'skunk', 'squirrel', 'tiger', 'turtle', 'walrus', 'wolf',
 ];
 
-export const url = 'https://5o3kijxvl4.execute-api.us-east-2.amazonaws.com/dev/api/v1/points';
+export const url = 'http://localhost:8080/api/v1/points';
 
 export const defaultOptions = (icon: string) => ({
   iconLayout: 'default#image',
